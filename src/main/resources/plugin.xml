@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--    Общее описание плагина. Ключевое здесь - аттрибут class - имя класса плагина (на самом деле, не совсем).
+        Класс должен реализовывать интерфейс com.vp.plugin.VPPlugin -->
+<plugin
+        id="ercomments"
+        name="ER Comments exporter"
+        description="Export only comments from ER Diagram"
+        provider="Leonid Vygovskiy"
+        class="ercomments.Plugin">
+
+    <!-- Место-заглушка для путей к используемым библиотекам. Заполняется динамически с помощью gradle -->
+    <runtime/>
+
+    <actionSets>
+        <contextSensitiveActionSet id="ercomments.Export">
+            <!-- Определяем контекст действия -->
+            <contextTypes all="false">
+                <include type="ERDiagram"/>
+            </contextTypes>
+
+            <!--
+                 menuPath:
+                   Пункт контекстного меню, после которого будет выведен наш пункт.
+                   Для Open Specification... нужно указать OpenSpecification.
+            -->
+            <action
+                    style="normal"
+                    menuPath="Export"
+                    id="ercomments.Export"
+                    label="Export comments as DDL">
+                <actionController class="ercomments.ExportERCommentsPluginAction"/>
+            </action>
+        </contextSensitiveActionSet>
+    </actionSets>
+</plugin>
